@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import App from "./App";
 import { store } from "./app/store";
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 import { GlobalStyle } from "./GlobalStyles";
 import { theme } from "./theme";
 
@@ -15,7 +16,9 @@ root.render(
     <ThemeProvider theme={theme}>
       <Provider store={store}>
         <GlobalStyle />
-        <App />
+        <ErrorBoundary>
+          <App />
+        </ErrorBoundary>
       </Provider>
     </ThemeProvider>
   </React.StrictMode>
