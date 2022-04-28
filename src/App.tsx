@@ -2,7 +2,7 @@ import * as React from "react";
 
 interface Props {}
 
-const App: React.FunctionComponent<Props> = (props) => {
+const App: React.FunctionComponent<Props> = () => {
   return <div>app</div>;
 };
 

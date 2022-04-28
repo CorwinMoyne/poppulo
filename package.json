@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --config config/webpack.config.js --env env=dev",
-    "build": "webpack --config config/webpack.config.js --env env=prod"
+    "build": "webpack --config config/webpack.config.js --env env=prod",
+    "lint": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx,json}\""
   },
   "keywords": [],
   "author": "",
@@ -27,6 +28,7 @@
     "@typescript-eslint/parser": "^5.21.0",
     "babel-loader": "^8.2.5",
     "eslint": "^8.14.0",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.5.0",
     "html-webpack-plugin": "^5.5.0",
