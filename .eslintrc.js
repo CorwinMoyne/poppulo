@@ -16,6 +16,7 @@ module.exports = {
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/typescript",
+    "plugin:prettier/recommended",
   ],
   rules: {
     "no-unused-vars": "off",

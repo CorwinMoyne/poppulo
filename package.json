@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --config config/webpack.config.js --env env=dev",
     "build": "webpack --config config/webpack.config.js --env env=prod",
-    "lint": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx,json}\""
+    "lint": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx,json}\"",
+    "format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
   },
   "keywords": [],
   "author": "",
@@ -28,10 +29,13 @@
     "@typescript-eslint/parser": "^5.21.0",
     "babel-loader": "^8.2.5",
     "eslint": "^8.14.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.5.0",
     "html-webpack-plugin": "^5.5.0",
+    "prettier": "^2.6.2",
     "react-refresh": "^0.13.0",
     "typescript": "^4.6.3",
     "webpack": "^5.72.0",
