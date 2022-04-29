@@ -1,12 +1,17 @@
 import * as React from "react";
-import { Box } from "./components/styles/Box";
+import Events from "./features/Events/containers/Events";
 
 interface Props {}
 
 const App: React.FunctionComponent<Props> = () => {
+  // React.useEffect(() => {
+  //   const response = require("./results.json");
+  //   const results = response.result.event;
+  //   console.log(results);
+  // }, []);
   return (
     <div>
-      <Box bg="red">test</Box>
+      <Events />
     </div>
   );
 };
