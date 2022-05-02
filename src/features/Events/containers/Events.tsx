@@ -1,4 +1,4 @@
-import { Button, SelectChangeEvent } from "@mui/material";
+import { Button, SelectChangeEvent, Typography } from "@mui/material";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
@@ -7,6 +7,7 @@ import { Box } from "../../../components/styles/Box";
 import { Container } from "../../../components/styles/Container";
 import { ByFilter } from "../../enums/byFilter";
 import { Event } from "../../models/event";
+import SingleEvent from "../components/SingleEvent";
 import {
   getEvents,
   getEventsCategories,
@@ -54,13 +55,19 @@ const Events: React.FunctionComponent<Props> = (props) => {
     }
   };
 
-  const handleEvent = (event: Event) => {
+  const handleEventClick = (event: Event) => {
     dispatch(setSelectedEvent(event));
     navigate("event");
   };
 
   return (
     <Container maxWidth="md">
+      <Box mb={4}>
+        <Typography variant="h5" color="primary">
+          Historical Events
+        </Typography>
+      </Box>
+
       <form onSubmit={handleSubmit}>
         <Box flexDirection="column">
           <Box mb={3}>
@@ -104,19 +111,14 @@ const Events: React.FunctionComponent<Props> = (props) => {
         </Box>
       </form>
 
-      <Box mt={2} display="block">
+      <Box mt={4} display="block">
         {events.length > 0 &&
           events.map((event) => (
-            <Box
+            <SingleEvent
               key={event.date}
-              flexDirection="column"
-              mb={2}
-              cursor="pointer"
-              onClick={() => handleEvent(event)}
-            >
-              <Box>{event.date}</Box>
-              <Box>{event.description}</Box>
-            </Box>
+              event={event}
+              handleEventClick={handleEventClick}
+            />
           ))}
       </Box>
     </Container>
