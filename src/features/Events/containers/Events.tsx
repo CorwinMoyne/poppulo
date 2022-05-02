@@ -81,8 +81,8 @@ const Events: React.FunctionComponent<Props> = (props) => {
             />
           </Box>
 
-          {filter === ByFilter.ByPlace && placeCategories.length > 0 && (
-            <Box mb={3}>
+          <Box mb={3}>
+            {filter === ByFilter.ByPlace && placeCategories.length > 0 && (
               <Select
                 label="Place"
                 value={place}
@@ -91,19 +91,19 @@ const Events: React.FunctionComponent<Props> = (props) => {
                 }
                 options={placeCategories}
               />
-            </Box>
-          )}
+            )}
 
-          {filter === ByFilter.ByTopic && topicCategories.length > 0 && (
-            <Select
-              label="Topic"
-              value={topic}
-              onChange={(event: SelectChangeEvent) =>
-                setTopic(event.target.value)
-              }
-              options={topicCategories}
-            />
-          )}
+            {filter === ByFilter.ByTopic && topicCategories.length > 0 && (
+              <Select
+                label="Topic"
+                value={topic}
+                onChange={(event: SelectChangeEvent) =>
+                  setTopic(event.target.value)
+                }
+                options={topicCategories}
+              />
+            )}
+          </Box>
 
           <Button type="submit" variant="contained">
             Search

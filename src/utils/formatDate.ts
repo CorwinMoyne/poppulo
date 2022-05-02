@@ -1,7 +1,7 @@
 export const formatDate = (date: string) => {
   if (!date.includes("/")) {
     if (date.includes("-")) {
-      return `${date} B.C.`;
+      return `${date.replace(/[-]/g, "")} B.C.`;
     } else {
       return `${date} A.D.`;
     }
