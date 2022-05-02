@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingAsync from "./components/LoadingAsync/LoadingAsync";
 import { Box } from "./components/styles/Box";
-import Event from "./features/Event/Event";
+import Event from "./features/Event/Event.lazy";
 import Events from "./features/Events/Events";
 
 interface Props {}

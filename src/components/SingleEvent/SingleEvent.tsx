@@ -7,7 +7,7 @@ import { Box } from "../styles/Box";
 interface Props {
   event: Event;
   handleEventClick?: (event: Event) => void;
-  testId: string;
+  testId?: string;
 }
 
 const SingleEvent: React.FunctionComponent<Props> = (props) => {
