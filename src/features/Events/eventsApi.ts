@@ -1,7 +1,7 @@
 // @ts-ignore
 import XMLParser from "react-xml-parser";
-import { ByFilter } from "../enums/byFilter";
-import { Event } from "../models/event";
+import { Event } from "../../models/event";
+import { CategoryFilter } from "./enums/categoryFilter";
 
 const toJson = (data: any) => {
   const xml = new XMLParser().parseFromString(data);
@@ -45,14 +45,14 @@ export const fetchCategoriesFromJson = async () => {
   const topicCategories: string[] = [];
 
   response.result.events.forEach((event: any) => {
-    if (event.category1 === ByFilter.ByPlace) {
+    if (event.category1 === CategoryFilter.ByPlace) {
       const placeCategory = event.category2
         ?.replace(/[/=]/g, "")
         .replace(/[\s]/, "");
       if (placeCategory && !placeCategories.includes(placeCategory)) {
         placeCategories.push(placeCategory);
       }
-    } else if (event.category1 === ByFilter.ByTopic) {
+    } else if (event.category1 === CategoryFilter.ByTopic) {
       const topicCategory = event.category2
         ?.replace(/[\=]/g, "")
         .replace(/[\s]/, "");

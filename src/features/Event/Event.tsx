@@ -1,10 +1,10 @@
 import { Typography } from "@mui/material";
 import * as React from "react";
-import { useAppSelector } from "../../../app/hooks";
-import { Box } from "../../../components/styles/Box";
-import { Container } from "../../../components/styles/Container";
-import SingleEvent from "../components/SingleEvent";
-import { selectedEvent } from "../eventsSlice";
+import SingleEvent from "../../components/SingleEvent/SingleEvent";
+import { Box } from "../../components/styles/Box";
+import { Container } from "../../components/styles/Container";
+import { useAppSelector } from "../../store/hooks";
+import { selectedEvent } from "../../store/slices/eventsSlice";
 
 interface Props {}
 

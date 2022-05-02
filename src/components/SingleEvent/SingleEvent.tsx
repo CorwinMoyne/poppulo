@@ -1,8 +1,8 @@
 import { Typography } from "@mui/material";
 import * as React from "react";
-import { Box } from "../../../components/styles/Box";
-import { formatDate } from "../../../utils/formatDate";
 import { Event } from "../../models/event";
+import { formatDate } from "../../utils/formatDate";
+import { Box } from "../styles/Box";
 
 interface Props {
   event: Event;

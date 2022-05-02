@@ -1,7 +1,7 @@
 import { render, RenderOptions } from "@testing-library/react";
 import React, { ReactElement } from "react";
 import { Provider } from "react-redux";
-import { store } from "./app/store";
+import { store } from "./store/store";
 
 interface Props {
   children: JSX.Element;
