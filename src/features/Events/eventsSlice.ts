@@ -6,12 +6,14 @@ import { fetchCategoriesFromJson, fetchEvents } from "./eventsApi";
 
 export interface EventsState {
   events: Event[];
+  selectedEvent: Event | undefined;
   placeCategories: string[];
   topicCategories: string[];
 }
 
 const initialState: EventsState = {
   events: [],
+  selectedEvent: undefined,
   placeCategories: [],
   topicCategories: [],
 };
@@ -50,6 +52,9 @@ export const eventsSlice = createSlice({
     addEvents: (state, action) => {
       state.events = action.payload;
     },
+    setSelectedEvent: (state, action) => {
+      state.selectedEvent = action.payload;
+    },
     setPlaceCategories: (state, action) => {
       state.placeCategories = action.payload;
     },
@@ -59,10 +64,15 @@ export const eventsSlice = createSlice({
   },
 });
 
-export const { addEvents, setPlaceCategories, setTopicCategories } =
-  eventsSlice.actions;
+export const {
+  addEvents,
+  setSelectedEvent,
+  setPlaceCategories,
+  setTopicCategories,
+} = eventsSlice.actions;
 
 export const selectEvents = (state: RootState) => state.events.events;
+export const selectedEvent = (state: RootState) => state.events.selectedEvent;
 export const selectPlaceCategories = (state: RootState) =>
   state.events.placeCategories;
 export const selectTopicCategories = (state: RootState) =>

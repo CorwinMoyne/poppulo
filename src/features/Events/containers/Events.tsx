@@ -1,21 +1,25 @@
 import { Button, SelectChangeEvent } from "@mui/material";
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import Select from "../../../components/Select/Select";
 import { Box } from "../../../components/styles/Box";
 import { ByFilter } from "../../enums/byFilter";
+import { Event } from "../../models/event";
 import {
   getEvents,
   getEventsCategories,
   selectEvents,
   selectPlaceCategories,
   selectTopicCategories,
+  setSelectedEvent,
 } from "../eventsSlice";
 
 interface Props {}
 
 const Events: React.FunctionComponent<Props> = (props) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const placeCategories = useAppSelector(selectPlaceCategories);
   const topicCategories = useAppSelector(selectTopicCategories);
@@ -47,6 +51,11 @@ const Events: React.FunctionComponent<Props> = (props) => {
     if (query) {
       dispatch(getEvents(query));
     }
+  };
+
+  const handleEvent = (event: Event) => {
+    dispatch(setSelectedEvent(event));
+    navigate("event");
   };
 
   return (
@@ -96,6 +105,7 @@ const Events: React.FunctionComponent<Props> = (props) => {
               flexDirection="column"
               mb={2}
               cursor="pointer"
+              onClick={() => handleEvent(event)}
             >
               <Box>{event.date}</Box>
               <Box>{event.description}</Box>
