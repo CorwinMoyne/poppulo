@@ -21,7 +21,10 @@
     "@babel/preset-typescript": "^7.16.7",
     "@babel/runtime": "^7.17.9",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.5",
+    "@testing-library/dom": "^8.13.0",
+    "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
+    "@testing-library/user-event": "^14.1.1",
     "@types/jest": "^27.4.1",
     "@types/react": "^18.0.8",
     "@types/react-dom": "^18.0.0",
@@ -43,6 +46,8 @@
     "html-webpack-plugin": "^5.5.0",
     "husky": "^4.3.8",
     "jest": "^28.0.2",
+    "jest-environment-jsdom": "^28.0.2",
+    "jest-fetch-mock": "^3.0.3",
     "lint-staged": "^12.4.1",
     "prettier": "^2.6.2",
     "react-refresh": "^0.13.0",
@@ -81,5 +86,12 @@
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --write"
     ]
+  },
+  "jest": {
+    "automock": false,
+    "setupFilesAfterEnv": [
+      "./setupJest.js"
+    ],
+    "testEnvironment": "jsdom"
   }
 }

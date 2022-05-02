@@ -7,11 +7,13 @@ import { Box } from "../styles/Box";
 interface Props {
   event: Event;
   handleEventClick?: (event: Event) => void;
+  testId: string;
 }
 
 const SingleEvent: React.FunctionComponent<Props> = (props) => {
   return (
     <Box
+      data-testid={props.testId}
       key={props.event.date}
       flexDirection="column"
       mb={3}

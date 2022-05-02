@@ -8,6 +8,12 @@ module.exports = {
     react: {
       version: "detect",
     },
+    "import/resolver": {
+      node: {
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+        moduleDirectory: ["node_modules", "src/"],
+      },
+    },
   },
   extends: [
     "plugin:react/recommended",
@@ -37,5 +43,6 @@ module.exports = {
     ],
     "@typescript-eslint/ban-ts-comment": "off",
     "react-hooks/exhaustive-deps": "off",
+    "import/no-unresolved": "off",
   },
 };

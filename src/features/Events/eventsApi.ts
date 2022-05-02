@@ -8,8 +8,6 @@ const toJson = (data: any) => {
   const events = xml.getElementsByTagName("event");
   const results: any[] = [];
 
-  console.log(events);
-
   events.forEach((event: any) => {
     event.children = event.children.map((child: any) => {
       return {
@@ -34,7 +32,9 @@ const toJson = (data: any) => {
 export const fetchEvents = async (query: string): Promise<Event[]> => {
   const endPoint = `https://www.vizgr.org/historical-events/search.php?format=xml&begin_date=-3000000&end_date=20151231&query=${query}&lang=en`;
   return fetch(endPoint)
-    .then((response) => response.text())
+    .then((response) => {
+      return response.text();
+    })
     .then((str) => toJson(str));
 };
 

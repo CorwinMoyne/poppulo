@@ -72,6 +72,7 @@ const Events: React.FunctionComponent<Props> = (props) => {
         <Box flexDirection="column">
           <Box mb={3}>
             <Select
+              id="filter-select"
               label="Filter"
               value={filter}
               onChange={(event: SelectChangeEvent) =>
@@ -85,6 +86,7 @@ const Events: React.FunctionComponent<Props> = (props) => {
             {filter === CategoryFilter.ByPlace &&
               placeCategories.length > 0 && (
                 <Select
+                  id="place-select"
                   label="Place"
                   value={place}
                   onChange={(event: SelectChangeEvent) =>
@@ -97,6 +99,7 @@ const Events: React.FunctionComponent<Props> = (props) => {
             {filter === CategoryFilter.ByTopic &&
               topicCategories.length > 0 && (
                 <Select
+                  id="topic-select"
                   label="Topic"
                   value={topic}
                   onChange={(event: SelectChangeEvent) =>
@@ -115,8 +118,9 @@ const Events: React.FunctionComponent<Props> = (props) => {
 
       <Box mt={4} display="block">
         {events.length > 0 &&
-          events.map((event) => (
+          events.map((event, index) => (
             <SingleEvent
+              testId={`event-${index}`}
               key={event.date}
               event={event}
               handleEventClick={handleEventClick}
