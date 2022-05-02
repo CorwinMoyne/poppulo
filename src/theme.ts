@@ -6,7 +6,7 @@ export const theme = {
   breakpoints: ["600px", "900px", "1200px", "1536px"],
   colors: {
     primary: "#3a4656",
-    secondary: "#ffbb00",
+    secondary: "#1976d2",
     foreground: "ffffff",
     error: "#FF6347",
     success: "#199f2c",

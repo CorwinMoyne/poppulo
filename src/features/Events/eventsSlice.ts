@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
+import { setIsLoading } from "../../services/loadingService";
 import { showToast } from "../../services/toastService";
 import { Event } from "../models/event";
 import { fetchCategoriesFromJson, fetchEvents } from "./eventsApi";
@@ -22,11 +23,14 @@ export const getEvents = createAsyncThunk<void, string>(
   "events/getEvents",
   async (query, thunkAPI) => {
     try {
+      setIsLoading(true);
       const events = await fetchEvents(query);
       thunkAPI.dispatch(addEvents(events));
     } catch (error) {
       console.error(error);
       showToast(`No results found for query ${query}`, "error");
+    } finally {
+      setIsLoading(false);
     }
   }
 );
@@ -41,6 +45,7 @@ export const getEventsCategories = createAsyncThunk(
     } catch (error) {
       console.error(error);
       showToast("There was a problem getting the categories", "error");
+    } finally {
     }
   }
 );
