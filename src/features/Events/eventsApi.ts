@@ -1,6 +1,7 @@
 // @ts-ignore
 import XMLParser from "react-xml-parser";
 import { ByFilter } from "../enums/byFilter";
+import { Event } from "../models/event";
 
 const toJson = (data: any) => {
   const xml = new XMLParser().parseFromString(data);
@@ -30,7 +31,7 @@ const toJson = (data: any) => {
   return results;
 };
 
-export const fetchEvents = async (query: string) => {
+export const fetchEvents = async (query: string): Promise<Event[]> => {
   const endPoint = `https://www.vizgr.org/historical-events/search.php?format=xml&begin_date=-3000000&end_date=20151231&query=${query}&lang=en`;
   return fetch(endPoint)
     .then((response) => response.text())

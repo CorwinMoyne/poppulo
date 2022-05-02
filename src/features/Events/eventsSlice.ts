@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { showToast } from "../../services/toastService";
+import { Event } from "../models/event";
 import { fetchCategoriesFromJson, fetchEvents } from "./eventsApi";
 
 export interface EventsState {
-  events: any; // TODO: create model
+  events: Event[];
   placeCategories: string[];
   topicCategories: string[];
 }

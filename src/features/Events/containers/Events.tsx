@@ -2,10 +2,12 @@ import { Button, SelectChangeEvent } from "@mui/material";
 import * as React from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import Select from "../../../components/Select/Select";
+import { Box } from "../../../components/styles/Box";
 import { ByFilter } from "../../enums/byFilter";
 import {
   getEvents,
   getEventsCategories,
+  selectEvents,
   selectPlaceCategories,
   selectTopicCategories,
 } from "../eventsSlice";
@@ -17,6 +19,7 @@ const Events: React.FunctionComponent<Props> = (props) => {
 
   const placeCategories = useAppSelector(selectPlaceCategories);
   const topicCategories = useAppSelector(selectTopicCategories);
+  const events = useAppSelector(selectEvents);
 
   const [filter, setFilter] = React.useState(ByFilter.ByPlace);
   const [place, setPlace] = React.useState("");
@@ -47,38 +50,59 @@ const Events: React.FunctionComponent<Props> = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Select
-        label="Filter"
-        value={filter}
-        onChange={(event: SelectChangeEvent) =>
-          setFilter(event.target.value as ByFilter)
-        }
-        options={Object.values(ByFilter)}
-      />
-
-      {filter === ByFilter.ByPlace && placeCategories.length > 0 && (
+    <>
+      <form onSubmit={handleSubmit}>
         <Select
-          label="Place"
-          value={place}
-          onChange={(event: SelectChangeEvent) => setPlace(event.target.value)}
-          options={placeCategories}
+          label="Filter"
+          value={filter}
+          onChange={(event: SelectChangeEvent) =>
+            setFilter(event.target.value as ByFilter)
+          }
+          options={Object.values(ByFilter)}
         />
-      )}
 
-      {filter === ByFilter.ByTopic && topicCategories.length > 0 && (
-        <Select
-          label="Topic"
-          value={topic}
-          onChange={(event: SelectChangeEvent) => setTopic(event.target.value)}
-          options={topicCategories}
-        />
-      )}
+        {filter === ByFilter.ByPlace && placeCategories.length > 0 && (
+          <Select
+            label="Place"
+            value={place}
+            onChange={(event: SelectChangeEvent) =>
+              setPlace(event.target.value)
+            }
+            options={placeCategories}
+          />
+        )}
 
-      <Button type="submit" variant="contained">
-        Search
-      </Button>
-    </form>
+        {filter === ByFilter.ByTopic && topicCategories.length > 0 && (
+          <Select
+            label="Topic"
+            value={topic}
+            onChange={(event: SelectChangeEvent) =>
+              setTopic(event.target.value)
+            }
+            options={topicCategories}
+          />
+        )}
+
+        <Button type="submit" variant="contained">
+          Search
+        </Button>
+      </form>
+
+      <Box mt={2} display="block">
+        {events.length > 0 &&
+          events.map((event) => (
+            <Box
+              key={event.date}
+              flexDirection="column"
+              mb={2}
+              cursor="pointer"
+            >
+              <Box>{event.date}</Box>
+              <Box>{event.description}</Box>
+            </Box>
+          ))}
+      </Box>
+    </>
   );
 };
 

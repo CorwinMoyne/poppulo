@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import {
   background,
   BackgroundProps,
@@ -31,11 +31,18 @@ interface Props
     PositionProps,
     BackgroundProps {
   display?: string;
+  cursor?: string;
 }
 
 export const Box = styled.div<Props>`
   user-select: none;
   display: ${(props) => props.display || "flex"};
+
+  ${(props) =>
+    props.cursor &&
+    css`
+      cursor: ${props.cursor};
+    `};
 
   ${color};
   ${layout};
