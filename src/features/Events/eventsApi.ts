@@ -1,9 +1,10 @@
 // @ts-ignore
 import XMLParser from "react-xml-parser";
+import { ByFilter } from "../enums/byFilter";
 
 // we have to retrieve it in xml and format to json as it contains duplicate keys
 const endPoint =
-  "https://www.vizgr.org/historical-events/search.php?format=xml&begin_date=-%203000000&end_date=20151231&lang=en&limit=10";
+  "https://www.vizgr.org/historical-events/search.php?format=json&begin_date=-%203000000&end_date=20151231&lang=en&limit=10";
 
 const toJson = (data: any) => {
   const xml = new XMLParser().parseFromString(data);
@@ -37,4 +38,34 @@ export const fetchEvents = async () => {
   return fetch(endPoint)
     .then((response) => response.text())
     .then((str) => toJson(str));
+};
+
+export const fetchCategoriesFromJson = async () => {
+  const response = require("../../events.json");
+
+  const placeCategories: string[] = [];
+  const topicCategories: string[] = [];
+
+  response.result.events.forEach((event: any) => {
+    if (event.category1 === ByFilter.ByPlace) {
+      const placeCategory = event.category2
+        ?.replace(/[/=]/g, "")
+        .replace(/[\s]/, "");
+      if (placeCategory && !placeCategories.includes(placeCategory)) {
+        placeCategories.push(placeCategory);
+      }
+    } else if (event.category1 === ByFilter.ByTopic) {
+      const topicCategory = event.category2
+        ?.replace(/[\=]/g, "")
+        .replace(/[\s]/, "");
+      if (topicCategory && !topicCategories.includes(topicCategory)) {
+        topicCategories.push(topicCategory);
+      }
+    }
+  });
+
+  return {
+    placeCategories: placeCategories.sort(),
+    topicCategories: topicCategories.sort(),
+  };
 };
