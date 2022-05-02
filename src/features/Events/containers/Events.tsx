@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import Select from "../../../components/Select/Select";
 import { Box } from "../../../components/styles/Box";
+import { Container } from "../../../components/styles/Container";
 import { ByFilter } from "../../enums/byFilter";
 import { Event } from "../../models/event";
 import {
@@ -59,42 +60,48 @@ const Events: React.FunctionComponent<Props> = (props) => {
   };
 
   return (
-    <>
+    <Container maxWidth="md">
       <form onSubmit={handleSubmit}>
-        <Select
-          label="Filter"
-          value={filter}
-          onChange={(event: SelectChangeEvent) =>
-            setFilter(event.target.value as ByFilter)
-          }
-          options={Object.values(ByFilter)}
-        />
+        <Box flexDirection="column">
+          <Box mb={3}>
+            <Select
+              label="Filter"
+              value={filter}
+              onChange={(event: SelectChangeEvent) =>
+                setFilter(event.target.value as ByFilter)
+              }
+              options={Object.values(ByFilter)}
+            />
+          </Box>
 
-        {filter === ByFilter.ByPlace && placeCategories.length > 0 && (
-          <Select
-            label="Place"
-            value={place}
-            onChange={(event: SelectChangeEvent) =>
-              setPlace(event.target.value)
-            }
-            options={placeCategories}
-          />
-        )}
+          {filter === ByFilter.ByPlace && placeCategories.length > 0 && (
+            <Box mb={3}>
+              <Select
+                label="Place"
+                value={place}
+                onChange={(event: SelectChangeEvent) =>
+                  setPlace(event.target.value)
+                }
+                options={placeCategories}
+              />
+            </Box>
+          )}
 
-        {filter === ByFilter.ByTopic && topicCategories.length > 0 && (
-          <Select
-            label="Topic"
-            value={topic}
-            onChange={(event: SelectChangeEvent) =>
-              setTopic(event.target.value)
-            }
-            options={topicCategories}
-          />
-        )}
+          {filter === ByFilter.ByTopic && topicCategories.length > 0 && (
+            <Select
+              label="Topic"
+              value={topic}
+              onChange={(event: SelectChangeEvent) =>
+                setTopic(event.target.value)
+              }
+              options={topicCategories}
+            />
+          )}
 
-        <Button type="submit" variant="contained">
-          Search
-        </Button>
+          <Button type="submit" variant="contained">
+            Search
+          </Button>
+        </Box>
       </form>
 
       <Box mt={2} display="block">
@@ -112,7 +119,7 @@ const Events: React.FunctionComponent<Props> = (props) => {
             </Box>
           ))}
       </Box>
-    </>
+    </Container>
   );
 };
 
