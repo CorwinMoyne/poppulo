@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { fetchCategoriesFromJson } from "./eventsApi";
+import { showToast } from "../../services/toastService";
+import { fetchCategoriesFromJson, fetchEvents } from "./eventsApi";
 
 export interface EventsState {
   events: any; // TODO: create model
@@ -14,15 +15,15 @@ const initialState: EventsState = {
   topicCategories: [],
 };
 
-export const getEvents = createAsyncThunk(
+export const getEvents = createAsyncThunk<void, string>(
   "events/getEvents",
-  async (_, thunkAPI) => {
+  async (query, thunkAPI) => {
     try {
-      const events = await fetchCategoriesFromJson();
-      // thunkAPI.dispatch(addEvents(events));
+      const events = await fetchEvents(query);
+      thunkAPI.dispatch(addEvents(events));
     } catch (error) {
-      console.log(error);
-      // TODO: handle error
+      console.error(error);
+      showToast(`No results found for query ${query}`, "error");
     }
   }
 );
@@ -36,7 +37,7 @@ export const getEventsCategories = createAsyncThunk(
       thunkAPI.dispatch(setTopicCategories(categories.topicCategories));
     } catch (error) {
       console.error(error);
-      // TODO: handle error
+      showToast("There was a problem getting the categories", "error");
     }
   }
 );

@@ -36,5 +36,6 @@ module.exports = {
       },
     ],
     "@typescript-eslint/ban-ts-comment": "off",
+    "react-hooks/exhaustive-deps": "off",
   },
 };

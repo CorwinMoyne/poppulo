@@ -2,10 +2,6 @@
 import XMLParser from "react-xml-parser";
 import { ByFilter } from "../enums/byFilter";
 
-// we have to retrieve it in xml and format to json as it contains duplicate keys
-const endPoint =
-  "https://www.vizgr.org/historical-events/search.php?format=json&begin_date=-%203000000&end_date=20151231&lang=en&limit=10";
-
 const toJson = (data: any) => {
   const xml = new XMLParser().parseFromString(data);
   const events = xml.getElementsByTagName("event");
@@ -34,7 +30,8 @@ const toJson = (data: any) => {
   return results;
 };
 
-export const fetchEvents = async () => {
+export const fetchEvents = async (query: string) => {
+  const endPoint = `https://www.vizgr.org/historical-events/search.php?format=xml&begin_date=-3000000&end_date=20151231&query=${query}&lang=en`;
   return fetch(endPoint)
     .then((response) => response.text())
     .then((str) => toJson(str));

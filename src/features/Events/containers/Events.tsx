@@ -1,9 +1,10 @@
-import { SelectChangeEvent } from "@mui/material";
+import { Button, SelectChangeEvent } from "@mui/material";
 import * as React from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import Select from "../../../components/Select/Select";
 import { ByFilter } from "../../enums/byFilter";
 import {
+  getEvents,
   getEventsCategories,
   selectPlaceCategories,
   selectTopicCategories,
@@ -37,8 +38,16 @@ const Events: React.FunctionComponent<Props> = (props) => {
     }
   }, [topicCategories]);
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const query = filter === ByFilter.ByPlace ? place : topic;
+    if (query) {
+      dispatch(getEvents(query));
+    }
+  };
+
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <Select
         label="Filter"
         value={filter}
@@ -65,7 +74,11 @@ const Events: React.FunctionComponent<Props> = (props) => {
           options={topicCategories}
         />
       )}
-    </div>
+
+      <Button type="submit" variant="contained">
+        Search
+      </Button>
+    </form>
   );
 };
 
